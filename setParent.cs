@@ -24,6 +24,19 @@ public class setParent : MonoBehaviour {
 
 	void FixedUpdate()
 	{
+
+        Vector3 currentDistance = transform.position;
+        Vector3 currentInterval = transform.GetChild(0).transform.position - currentDistance;
+
+        float changeInInterval = Mathf.Abs(currentInterval.z - initialInterval.z);
+
+        if (changeInInterval > 0.015)
+        {
+            transform.GetChild(0).transform.position = transform.position + initialInterval;
+            return;
+        }
+
+
         Vector3 changed = rb.velocity;
 		foreach (Transform child in transform) {
             Rigidbody childRb = child.GetComponent<Rigidbody>();
@@ -38,8 +51,13 @@ public class setParent : MonoBehaviour {
             }
         }
 
-        Vector3 currentDistance = transform.position;
         float changedDistance = currentDistance.z - initialDistance.z;
         textObject.text = "" + (changedDistance).ToString("0.00");
+    }
+
+
+    private void LateUpdate()
+    {
+
     }
 }
