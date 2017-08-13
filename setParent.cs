@@ -48,8 +48,12 @@ public class setParent : MonoBehaviour {
             }
         }
 
-        float changedDistance = currentDistance.z - initialDistance.z;
+        float changedDistance = transform.position.z - initialDistance.z;
         textObject.text = "" + (changedDistance).ToString("0.00");
+
+        if (changedDistance < -0.02f) {
+            transform.position = Vector3.Scale(transform.position, new Vector3(1, 1, 0)) + new Vector3(0, 0, -0.02f + initialDistance.z);
+        }
     }
 
 
