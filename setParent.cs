@@ -25,17 +25,14 @@ public class setParent : MonoBehaviour {
 	void FixedUpdate()
 	{
 
-        Vector3 currentDistance = transform.position;
-        Vector3 currentInterval = transform.GetChild(0).transform.position - currentDistance;
+        Vector3 currentInterval = transform.GetChild(0).transform.position - transform.position;
 
         float changeInInterval = Mathf.Abs(currentInterval.z - initialInterval.z);
 
-        if (changeInInterval > 0.015)
+        if (changeInInterval > 0.02)
         {
             transform.GetChild(0).transform.position = transform.position + initialInterval;
-            return;
         }
-
 
         Vector3 changed = rb.velocity;
 		foreach (Transform child in transform) {
